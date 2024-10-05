@@ -24,6 +24,6 @@ const companySchema = Schema({
         ref:"User",
         required:true
     }
-},{timestamps: true});
+},{timestamps: true}); 
 
 export const Company = model('Company',companySchema);
