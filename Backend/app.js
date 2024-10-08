@@ -2,6 +2,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { config } from "dotenv";
 import cors from 'cors';
+import userRoute from './routes/user.route.js';
+
 config();
 
 const app = express();
@@ -16,4 +18,7 @@ const coresOption = {
 }
 
 app.use( cors(coresOption) );
+
+app.use('/api/v1/user', userRoute);
+
 export default app;
