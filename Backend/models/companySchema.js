@@ -1,4 +1,4 @@
-import mongoose, { Schema,model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const companySchema = Schema({
     name:{
@@ -8,7 +8,6 @@ const companySchema = Schema({
     },
     description:{
         type:String,
-        
     },
     website:{
         type:String,
@@ -27,4 +26,4 @@ const companySchema = Schema({
     }
 },{timestamps: true}); 
 
-export const Company = model('Company',companySchema);
+export const Company =mongoose.model('Company',companySchema);
