@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import cors from 'cors';
 import userRoute from './routes/user.route.js';
 import companyRoute from './routes/company.route.js'
+import jobRoute from './routes/job.route.js'
 
 config();
 
@@ -22,6 +23,7 @@ app.use( cors(coresOption) );
 
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/company', companyRoute);
+app.use('/api/v1/job', jobRoute);
 
 
 export default app;
