@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
-import Navbar from "./Navbar"
+import { Link, useNavigate } from "react-router-dom"
+import Navbar from "./Navbar";
+import axios from "axios";
+import { USER_API_END_POINT } from "../utils/constant";
+import {  toast } from 'react-toastify';
+
 
 const Login = () => {
     const [input, setInput] = useState({
@@ -10,13 +14,31 @@ const Login = () => {
         
     });
 
+    const navigate = useNavigate();
+
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
 
     const submitHandler = async (e) =>{
         e.preventDefault();
-        console.log(input);
+
+        try {
+            const res = await axios.post(`${USER_API_END_POINT}/login`,input, {
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                withCredentials: true
+            });
+            if(res.data.success){
+                navigate('/');
+                toast.success(res.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+        }
     }
     return (
         <div>
@@ -29,6 +51,7 @@ const Login = () => {
                         <label >Email</label>
                         <input 
                         className="border border-gray-200 p-1 rounded-md pl-2" type="email"
+                        name="email"
                         value={input.email} 
                         placeholder="email"
                         onChange={changeEventHandler}
@@ -40,6 +63,7 @@ const Login = () => {
                         <input 
                         className="border border-gray-200 p-1 rounded-md pl-2" type="text" 
                         placeholder="password" 
+                        name="password"
                         value={input.password} 
                         onChange={changeEventHandler} />
                     </div>
@@ -51,9 +75,9 @@ const Login = () => {
                                 <input
                                     type="radio"
                                     name="role"
-                                    value="student"
+                                    value="Student"
                                     className="mr-1 cursor-pointer"
-                                    checked={input.role === 'student'}
+                                    checked={input.role === 'Student'}
                                     onChange={changeEventHandler}
                                 />
                                 Student
