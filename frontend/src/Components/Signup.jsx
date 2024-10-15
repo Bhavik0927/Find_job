@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import axios from 'axios';
 import { USER_API_END_POINT } from "../utils/constant";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import Loader from "./Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../store/authSlice";
 
 
 const Signup = () => {
@@ -16,7 +19,9 @@ const Signup = () => {
         file: ""
     });
 
+    const {loading} = useSelector(store => store.auth);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })
@@ -39,6 +44,7 @@ const Signup = () => {
         if (input.file) { formData.append("file", input.file) }
 
         try {
+            dispatch(setLoading(true))
             const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
@@ -54,6 +60,8 @@ const Signup = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
+        }finally {
+            dispatch(setLoading(false))
         }
     }
     return (
@@ -144,7 +152,9 @@ const Signup = () => {
                             />
                         </div>
                     </div>
-                    <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Signup</button>
+                    {
+                        loading ? <button className="w-full flex gap-2 items-center justify-center bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold"> <Loader />Please wait </button> : <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Signup</button>
+                    }
                     <span className="flex justify-center gap-1 mt-2 text-sm">Alreay have an account?  <Link to="/login" className="text-blue-500 underline">Login</Link></span>
                 </form>
             </div>

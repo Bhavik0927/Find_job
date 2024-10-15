@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import axios from "axios";
 import { USER_API_END_POINT } from "../utils/constant";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../store/authSlice";
+import Loader from "./Loader";
 
 
 const Login = () => {
@@ -11,26 +14,28 @@ const Login = () => {
         email: "",
         password: "",
         role: "",
-        
-    });
 
+    });
+    const { loading } = useSelector(store => store.auth);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
 
-    const submitHandler = async (e) =>{
+    const submitHandler = async (e) => {
         e.preventDefault();
 
         try {
-            const res = await axios.post(`${USER_API_END_POINT}/login`,input, {
-                headers:{
-                    "Content-Type":"application/json"
+            dispatch(setLoading(true));
+            const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+                headers: {
+                    "Content-Type": "application/json"
                 },
                 withCredentials: true
             });
-            if(res.data.success){
+            if (res.data.success) {
                 navigate('/');
                 toast.success(res.data.message)
             }
@@ -38,6 +43,8 @@ const Login = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
+        } finally {
+            dispatch(setLoading(false))
         }
     }
     return (
@@ -49,23 +56,23 @@ const Login = () => {
 
                     <div className="my-2 flex flex-col gap-1">
                         <label >Email</label>
-                        <input 
-                        className="border border-gray-200 p-1 rounded-md pl-2" type="email"
-                        name="email"
-                        value={input.email} 
-                        placeholder="email"
-                        onChange={changeEventHandler}
-                         />
+                        <input
+                            className="border border-gray-200 p-1 rounded-md pl-2" type="email"
+                            name="email"
+                            value={input.email}
+                            placeholder="email"
+                            onChange={changeEventHandler}
+                        />
                     </div>
-                    
+
                     <div className="my-2 flex flex-col gap-1">
                         <label >Password</label>
-                        <input 
-                        className="border border-gray-200 p-1 rounded-md pl-2" type="text" 
-                        placeholder="password" 
-                        name="password"
-                        value={input.password} 
-                        onChange={changeEventHandler} />
+                        <input
+                            className="border border-gray-200 p-1 rounded-md pl-2" type="text"
+                            placeholder="password"
+                            name="password"
+                            value={input.password}
+                            onChange={changeEventHandler} />
                     </div>
 
                     {/* radio buttons */}
@@ -95,10 +102,12 @@ const Login = () => {
                                 Recruiter
                             </label>
                         </div>
-                        
-                    </div>
 
-                    <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Login</button>
+                    </div>
+                    {
+                        loading ? <button className="w-full flex gap-2 items-center justify-center bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold"><Loader />Please wait </button> : <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Login</button>
+                    }
+
                     <span className="flex justify-center gap-1 mt-2 text-sm">Don't have an account?  <Link to="/signup" className="text-blue-500 underline">Signup</Link></span>
                 </form>
             </div>
