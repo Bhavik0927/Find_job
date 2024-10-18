@@ -20,10 +20,10 @@ const Navbar = () => {
 
                 {/* Navbar Content  */}
                 <div className="flex items-center gap-12">
-                    <ul className="flex font-medium items-center gap-5">
-                        <li>Home</li>
-                        <li>Jobs</li>
-                        <li>Brows</li>
+                    <ul className="flex font-medium items-center gap-5 cursor-pointer">
+                        <Link to="/"><li>Home</li></Link>
+                        <Link to="/jobs"> <li>Jobs</li> </Link>
+                        <Link><li>Brows</li></Link>
                     </ul>
                     {
                         !user ? (
