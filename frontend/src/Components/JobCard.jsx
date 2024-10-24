@@ -1,6 +1,10 @@
 import { CiBookmark } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const JobCard = () => {
+
+    const navigate = useNavigate();
+    const jobId = "jhdfbsdbfskjbf";
     return (
         <div className="flex justify-between gap-4 p-5 rounded-md shadow-xl bg-white border border-gray-100">
 
@@ -31,7 +35,7 @@ const JobCard = () => {
                 </div>
 
                 <div className="mt-2 flex gap-2">
-                    <button className="inline-block px-3 py-1 text-sm font-bold text-black border border-gray-400  rounded-full cursor-pointer ">Details</button>
+                    <button className="inline-block px-3 py-1 text-sm font-bold text-black border border-gray-400  rounded-full cursor-pointer" onClick={() => navigate(`/description/${jobId}`)}>Details</button>
 
                     <button className="inline-block px-3 py-1 text-sm font-bold text-white bg-red-600  rounded-full cursor-pointer">Save For Later</button>
                 </div>
