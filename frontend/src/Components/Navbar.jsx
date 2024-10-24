@@ -1,14 +1,15 @@
 // import { Link } from 'react-router-dom';
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {useSelector} from 'react-redux';
 
 const Navbar = () => {
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const togglePopover = () => setIsPopoverOpen(!isPopoverOpen);
 
+    const {user} = useSelector(store => store.auth);
 
-    const user = false;
     return (
         <div className="bg-white">
             <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
@@ -23,7 +24,7 @@ const Navbar = () => {
                     <ul className="flex font-medium items-center gap-5 cursor-pointer">
                         <Link to="/"><li>Home</li></Link>
                         <Link to="/jobs"> <li>Jobs</li> </Link>
-                        <Link><li>Brows</li></Link>
+                        <Link to="/browse"><li>Brows</li></Link>
                     </ul>
                     {
                         !user ? (
@@ -40,7 +41,7 @@ const Navbar = () => {
                             <div className="relative inline-block cursor-pointer">
                                 {/* Avatar */}
                                 <img
-                                    src="https://via.placeholder.com/50"
+                                    src='https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o='
                                     alt="Avatar"
                                     className="w-12 h-12 rounded-full cursor-pointer"
                                     onClick={togglePopover}
@@ -63,7 +64,7 @@ const Navbar = () => {
                                         </div>
 
                                         <div className="flex items-center justify-evenly  gap-3 mt-2">
-                                            <button className="text-black hover:underline">View Profile</button>
+                                            <button className="text-black hover:underline"><Link to="/view-profile"> View Profile </Link> </button>
                                             <button className="text-black hover:underline"> Logout</button>
                                         </div>
                                     </div>

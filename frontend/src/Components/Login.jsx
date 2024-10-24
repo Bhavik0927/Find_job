@@ -5,7 +5,7 @@ import axios from "axios";
 import { USER_API_END_POINT } from "../utils/constant";
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../store/authSlice";
+import { setAuthUser, setLoading } from "../store/authSlice";
 import Loader from "./Loader";
 
 
@@ -35,7 +35,10 @@ const Login = () => {
                 },
                 withCredentials: true
             });
+            console.log(res);
             if (res.data.success) {
+                console.log(res.data.user);
+                dispatch(setAuthUser(res.data.user))
                 navigate('/');
                 toast.success(res.data.message)
             }

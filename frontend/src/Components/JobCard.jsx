@@ -17,6 +17,7 @@ const JobCard = () => {
                 </div>
                 <h1 className="font-bold text-lg my-1">Title</h1>
                 <p className="text-sm text-gray-600 mb-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, excepturi. Lorem ipsum dolor sit amet.</p>
+                
                 <div className="flex items-center flex-wrap gap-1">
                     <div className="inline-block px-2 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
                         <h2 className="text-black font-bold">12 Positions</h2>
@@ -35,7 +36,8 @@ const JobCard = () => {
                     <button className="inline-block px-3 py-1 text-sm font-bold text-white bg-red-600  rounded-full cursor-pointer">Save For Later</button>
                 </div>
             </div>
-            <button className="text-lg  font-bold  rounded-full bg-gray-100 h-10 w-[5.25rem] flex items-center justify-center hover:bg-gray-200"> <CiBookmark /> </button>
+            
+            <button className="text-lg  font-bold h-3 w-3   bg-gray-100   flex items-center justify-center hover:bg-gray-200"> <CiBookmark /> </button>
 
         </div>
     )

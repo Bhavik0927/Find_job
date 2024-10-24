@@ -4,6 +4,7 @@ import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Jobs from './Components/Jobs';
 import Browse from './Components/Browse';
+import Profile from './Components/Profile';
 
 const appRouter = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const appRouter = createBrowserRouter([
   {
     path:'/browse',
     element: <Browse />
+  },
+  {
+    path:'view-profile',
+    element: <Profile />
   }
   
 ])
@@ -34,8 +39,6 @@ const App = () => {
   return (
     <>
       <RouterProvider router={appRouter} />
-
-      
     </>
   )
 }

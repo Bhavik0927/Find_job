@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 const filterData = [
   {
@@ -15,8 +14,7 @@ const filterData = [
   }
 ]
 
-const FilterCard = () => {
-  //  
+const FilterCard = () => {  
 
   return (
     <div className="w-full bg-white p-3 rounded-md">
