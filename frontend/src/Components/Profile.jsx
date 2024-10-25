@@ -5,14 +5,16 @@ import { CiMail } from "react-icons/ci";
 import { MdContactPhone } from "react-icons/md";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
+import { useSelector } from "react-redux";
 
-const skills = ["HTML", "CSS", "Javascript"];
+
 const isResume = true;
 
 const Profile = () => {
     
     const [open,setIsOpen] = useState(false);
-    
+    const {user} = useSelector(store => store.auth);
+    console.log(user);
     return (
         <>
             <Navbar />
@@ -23,8 +25,8 @@ const Profile = () => {
                         <button className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden"><img src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg" alt="company" /></button>
 
                         <div className="ml-2">
-                            <h1 className="font-medium text-lg">Full Name</h1>
-                            <p className="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta ratione quos tempore obcaecati aperiam voluptatem!</p>
+                            <h1 className="font-medium text-lg">{user?.fullName}</h1>
+                            <p className="text-sm text-gray-600">{user?.profile?.bio}</p>
                         </div>
 
                     </div>
@@ -34,11 +36,11 @@ const Profile = () => {
                 <div>
                     <div className="flex items-center gap-2">
                         <CiMail />
-                        <span>fashionkidaa5@gmail.com</span>
+                        <span>{user?.email}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <MdContactPhone />
-                        <span>7057350329</span>
+                        <span>{user?.phoneNumber}</span>
                     </div>
 
                 </div>
@@ -47,7 +49,7 @@ const Profile = () => {
                     <h1>Skills</h1>
                     <div className="flex items-center gap-1">
                         {
-                            skills.length !== 0 ? skills.map((item, index) => {
+                            user?.profile?.skills.length !== 0 ? user?.profile?.skills.map((item, index) => {
                                 return (<div className="inline-block px-2 py-1 text-sm font-semibold text-white border  border-gray-400  rounded-full cursor-pointer" key={index}>
                                     <h2 className="text-black font-bold">{item}</h2>
                                 </div>)

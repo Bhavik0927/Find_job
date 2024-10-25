@@ -149,7 +149,8 @@ export const updateProfile = async (req, res) => {
             fullName: user.fullName,
             email: user.email,
             phoneNumber: user.phoneNumber,
-            role: user.role
+            role: user.role,
+            profile: user.profile
         }
 
         return res.status(200).json({
