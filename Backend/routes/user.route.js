@@ -9,6 +9,6 @@ const router = Router();
 router.route("/register").post(singleUpload, Register);
 router.route("/login").post(login);
 router.route("/logout").get(logout);
-router.route('/profile/update').post(IsAuthenticated ,updateProfile);
+router.route('/profile/update').post(IsAuthenticated,singleUpload,updateProfile);
 
 export default router;

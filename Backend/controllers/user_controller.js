@@ -110,6 +110,7 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, bio, skills } = req.body;
+        console.log(fullName, email, phoneNumber, bio, skills);
         const file = req.file;
         // if (!fullName || !email || !phoneNumber || !bio || !skills) {
         //     return res.status(400).json({
@@ -137,11 +138,6 @@ export const updateProfile = async (req, res) => {
         if(phoneNumber) {user.phoneNumber = phoneNumber}
         if(bio) {user.profile.bio = bio}
         if(skills) {user.profile.skills = skillsArray}
-        
-            
-            
-            
-            
 
         // resume comes here later
 

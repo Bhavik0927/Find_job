@@ -1,13 +1,18 @@
+import { useState } from "react";
 import Navbar from "./Navbar"
 import { CiEdit } from "react-icons/ci";
 import { CiMail } from "react-icons/ci";
 import { MdContactPhone } from "react-icons/md";
 import AppliedJobTable from "./AppliedJobTable";
+import UpdateProfileDialog from "./UpdateProfileDialog";
 
 const skills = ["HTML", "CSS", "Javascript"];
+const isResume = true;
 
 const Profile = () => {
-    const isResume = true;
+    
+    const [open,setIsOpen] = useState(false);
+    
     return (
         <>
             <Navbar />
@@ -24,7 +29,7 @@ const Profile = () => {
 
                     </div>
 
-                    <button className="text-2xl text-right  ml-5"> <CiEdit /></button>
+                    <button className="text-2xl text-right  ml-5" onClick={() => setIsOpen(true)} > <CiEdit /></button>
                 </div>
                 <div>
                     <div className="flex items-center gap-2">
@@ -62,6 +67,8 @@ const Profile = () => {
                 <h1 className="font-bold text-lg my-5">Applied Jobs</h1>
                 <AppliedJobTable />
             </div>
+
+            <UpdateProfileDialog open={open} setIsOpen={setIsOpen}/>
         </>
     )
 }
