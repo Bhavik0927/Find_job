@@ -61,7 +61,7 @@ const Profile = () => {
                 <div className="grid w-full max-w-sm items-center gap-1.5">
                     <label className="text-md font-bold" >Resume</label>
                     {
-                        isResume ? <a target="blank" href="https://google.com" className="text-blue-500 w-full hover:underline cursor-pointer">ResumeIT</a> : <span>Not Applicable</span>
+                        isResume ? <a target="blank" href={user?.profile?.resume} className="text-blue-500 w-full hover:underline cursor-pointer">{user?.profile?.resumeOriginalName}</a> : <span>Not Applicable</span>
                     }
                 </div>
             </div>

@@ -1,7 +1,11 @@
 // import { Link } from 'react-router-dom';
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import {useSelector} from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import { toast } from "react-toastify";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { setAuthUser } from "@/store/authSlice";
 
 const Navbar = () => {
 
@@ -9,6 +13,23 @@ const Navbar = () => {
     const togglePopover = () => setIsPopoverOpen(!isPopoverOpen);
 
     const {user} = useSelector(store => store.auth);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const logoutHandler = async() =>{
+        try {
+            const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true});
+            if(res.data.success){
+                dispatch(setAuthUser(null))
+                navigate('/');
+                toast.success(res.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+        }
+    }
 
     return (
         <div className="bg-white">
@@ -65,7 +86,7 @@ const Navbar = () => {
 
                                         <div className="flex items-center justify-evenly  gap-3 mt-2">
                                             <button className="text-black hover:underline"><Link to="/view-profile"> View Profile </Link> </button>
-                                            <button className="text-black hover:underline"> Logout</button>
+                                            <button className="text-black hover:underline" onClick={logoutHandler}> Logout</button>
                                         </div>
                                     </div>
                                 )}
