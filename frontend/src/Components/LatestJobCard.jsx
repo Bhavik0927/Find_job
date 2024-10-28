@@ -1,24 +1,27 @@
 
-export const LatestJobCard = () => {
+export const LatestJobCard = ({ job }) => {
     return (
         <div className="p-5 rounded-md shadow-xl bg-white border-gray-100">
             <div>
-                <h1 className="font-medium text-lg">Company Name</h1>
+                <h1 className="font-medium text-lg">{job?.company?.name}</h1>
                 <p className="text-sm text-gray-500">India</p>
             </div>
             <div>
-                <h1 className="font-bold text-lg my-2"  >Job Title</h1>
-                <p className="text-sm text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit?</p>
+                <h1 className="font-bold text-lg "  >{job?.title}</h1>
+                <p className="text-sm text-gray-600">{job?.description}</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center flex-wrap gap-2 my-2">
                 <div className="inline-block px-3 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
-                    <h2 className="text-black font-bold">12 Positions</h2>
+                    <h2 className="text-black font-bold">{job?.location}</h2>
                 </div>
                 <div className="inline-block px-3 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
-                    <h2 className="text-black font-bold">Part Time</h2>
+                    <h2 className="text-black font-bold">{job?.position} positions</h2>
                 </div>
                 <div className="inline-block px-3 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
-                    <h2 className="text-black font-bold">24 LPA</h2>
+                    <h2 className="text-black font-bold">{job?.jobType}</h2>
+                </div>
+                <div className="inline-block px-3 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
+                    <h2 className="text-black font-bold">{job.salary} LPA</h2>
                 </div>
             </div>
         </div>

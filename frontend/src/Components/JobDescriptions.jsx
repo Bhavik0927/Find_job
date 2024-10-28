@@ -1,24 +1,50 @@
+import axios from 'axios'
+import { useEffect } from 'react'
+import { JOB_API_END_POINT } from '@/utils/constant'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSingleJob } from '@/store/jobSlice'
+import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+
 
 const JobDescriptions = () => {
     const isApplied = true;
+    const params = useParams();
+    const jobId = params.id;
+    const { singleJob } = useSelector(store => store.job);
+    const { user } = useSelector(store => store.auth);
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        const fetchSingleJob = async () => {
+            try {
+                const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, { withCredentials: true });
+                console.log(res);
+                if (res.data.success) {
+                    dispatch(setSingleJob(res.data.job));
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchSingleJob();
+    }, [jobId, dispatch, user?._id])
     return (
         <>
             <Navbar />
             <div className="max-w-7xl mx-auto my-10">
                 <div className="flex items-center justify-between ">
                     <div>
-                        <h1 className="font-bold text-xl">Frontend Developer</h1>
+                        <h1 className="font-bold text-xl">{singleJob?.title}</h1>
                         <div className="flex items-center flex-wrap gap-1 mt-4">
                             <div className="inline-block px-2 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
                                 <h2 className="text-black font-bold">12 Positions</h2>
                             </div>
                             <div className="inline-block px-3 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
-                                <h2 className="text-black font-bold">Part Time</h2>
+                                <h2 className="text-black font-bold">{singleJob?.jobType}</h2>
                             </div>
                             <div className="inline-block px-3 py-1 text-sm font-semibold text-white border border-gray-400  rounded-full cursor-pointer">
-                                <h2 className="text-black font-bold">24 LPA</h2>
+                                <h2 className="text-black font-bold">{singleJob?.salary} LPA</h2>
                             </div>
                         </div>
                     </div>
@@ -35,22 +61,19 @@ const JobDescriptions = () => {
                 <h1 className="border-b-2 border-b-gray-300 font-medium py-4">Job Description</h1>
 
                 <div className="my-4">
-                    <h1 className="font-bold my-1">Role: <span className="pl-4 font-normal text-gray-800">Frontend Developer</span></h1>
-                    <h1 className="font-bold my-1">Location: <span className="pl-3 font-normal text-gray-800">Hyderabad</span></h1>
+                    <h1 className="font-bold my-1">Role: <span className="pl-4 font-normal text-gray-800">{singleJob?.title}</span></h1>
+                    <h1 className="font-bold my-1">Location:  <span className="pl-3 font-normal text-gray-800">{singleJob?.location}</span></h1>
 
-                    <h1 className="font-bold my-1">Description: <span className="pl-4 font-normal text-gray-800">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, earum quas nesciunt officiis aliquam quia.</span></h1>
+                    <h1 className="font-bold my-1">Description: <span className="pl-4 font-normal text-gray-800">{singleJob?.description}</span></h1>
 
-                    <h1 className="font-bold my-1">Experience: <span className="pl-4 font-normal text-gray-800">2 years</span></h1>
+                    <h1 className="font-bold my-1">Experience: <span className="pl-4 font-normal text-gray-800">{singleJob?.experienceLevel} years</span></h1>
 
-                    <h1 className="font-bold my-1">Salary: <span className="pl-4 font-normal text-gray-800">12 LPA</span></h1>
+                    <h1 className="font-bold my-1">Salary: <span className="pl-4 font-normal text-gray-800">{singleJob?.salary} LPA</span></h1>
 
-                    <h1 className="font-bold my-1">Total Applicants: <span className="pl-4 font-normal text-gray-800">4</span></h1>
+                    <h1 className="font-bold my-1">Total Applicants: <span className="pl-4 font-normal text-gray-800">{singleJob?.applications?.length}</span></h1>
 
-                    <h1 className="font-bold my-1">Posted Date: <span className="pl-4 font-normal text-gray-800">17-04-2023</span></h1>
+                    <h1 className="font-bold my-1">Posted Date: <span className="pl-4 font-normal text-gray-800">{singleJob?.createdAt.split("T")[0]}</span></h1>
 
-
-
-                    
                 </div>
             </div>
         </>

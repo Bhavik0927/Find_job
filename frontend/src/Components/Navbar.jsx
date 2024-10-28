@@ -1,7 +1,7 @@
 // import { Link } from 'react-router-dom';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
@@ -12,21 +12,19 @@ const Navbar = () => {
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const togglePopover = () => setIsPopoverOpen(!isPopoverOpen);
 
-    const {user} = useSelector(store => store.auth);
-
+    const { user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const logoutHandler = async() =>{
+    const logoutHandler = async () => {
         try {
-            const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true});
-            if(res.data.success){
-                dispatch(setAuthUser(null))
+            const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+            if (res.data.success) {
+                dispatch(setAuthUser(null));
                 navigate('/');
                 toast.success(res.data.message);
             }
         } catch (error) {
-            console.log(error);
             toast.error(error.response.data.message);
         }
     }
@@ -62,7 +60,7 @@ const Navbar = () => {
                             <div className="relative inline-block cursor-pointer">
                                 {/* Avatar */}
                                 <img
-                                    src='https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o='
+                                    src={user?.profile?.profilePhoto}
                                     alt="Avatar"
                                     className="w-12 h-12 rounded-full cursor-pointer"
                                     onClick={togglePopover}
@@ -72,13 +70,13 @@ const Navbar = () => {
                                     <div className="absolute left-[-255%] -translate-x-1/2 mt-2 w-80 p-4 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-700 ">
                                         <div className="flex gap-4 space-y-2">
                                             <img
-                                                src="https://via.placeholder.com/50"
+                                                src={user?.profile?.profilePhoto}
                                                 alt="Avatar"
                                                 className="w-10 h-10 rounded-full cursor-pointer"
                                             />
                                             <div>
-                                                <h4 className="font-bold">Bhavik Tembhare</h4>
-                                                <p className="text-sm text-slate-400">Lorem ipsum dolor sit amet.</p>
+                                                <h4 className="font-bold">{user?.fullName}</h4>
+                                                <p className="text-sm text-slate-400">{user?.profile?.bio}</p>
                                             </div>
 
 
