@@ -82,7 +82,7 @@ export const updateCompany = async (req,res) =>{
         if(!company){
             return res.status(404).json({
                 message: "Company not found",
-                success:fallse
+                success:false
             })
         }
 

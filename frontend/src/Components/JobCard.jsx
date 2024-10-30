@@ -4,12 +4,19 @@ import { useNavigate } from "react-router-dom";
 const JobCard = ({job}) => {
 
     const navigate = useNavigate();
+
+    const daysAgo = (mongodbTime) =>{
+        const createAt = new Date(mongodbTime);
+        const currentTime = new Date();
+        const timeDifference = currentTime - createAt;
+        return Math.floor(timeDifference/ (1000*24*60*60))
+    }
     
     return (
         <div className="flex justify-between gap-6 p-4 rounded-md shadow-xl bg-white border border-gray-100">
 
             <div>
-                <p className="text-sm text-gray-600">2 days ago</p>
+                <p className="text-sm text-gray-600">{daysAgo(job?.createdAt) === 0 ? "Today" : `${daysAgo(job?.createdAt)} days ago` }</p>
                 <div className="flex mt-2 items-center  ">
                     <button className="w-10 h-10 border border-gray-200"><img src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg" alt="company" /></button>
 

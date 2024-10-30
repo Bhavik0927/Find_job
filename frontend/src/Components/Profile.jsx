@@ -6,14 +6,15 @@ import { MdContactPhone } from "react-icons/md";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useSelector } from "react-redux";
+import { Badge } from "./ui/badge";
 
 
 const isResume = true;
 
 const Profile = () => {
-    
-    const [open,setIsOpen] = useState(false);
-    const {user} = useSelector(store => store.auth);
+
+    const [open, setIsOpen] = useState(false);
+    const { user } = useSelector(store => store.auth);
     console.log(user);
     return (
         <>
@@ -49,12 +50,7 @@ const Profile = () => {
                     <h1>Skills</h1>
                     <div className="flex items-center gap-1">
                         {
-                            user?.profile?.skills.length !== 0 ? user?.profile?.skills.map((item, index) => {
-                                return (<div className="inline-block px-2 py-1 text-sm font-semibold text-white border  border-gray-400  rounded-full cursor-pointer" key={index}>
-                                    <h2 className="text-black font-bold">{item}</h2>
-                                </div>)
-
-                            }) : <span>Not Applicable</span>
+                            user?.profile?.length !== 0 ? user?.profile?.skills.map((item, index) => <Badge key={index}>{item}</Badge>) : <span>NA</span>
                         }
                     </div>
                 </div>
@@ -70,7 +66,7 @@ const Profile = () => {
                 <AppliedJobTable />
             </div>
 
-            <UpdateProfileDialog open={open} setIsOpen={setIsOpen}/>
+            <UpdateProfileDialog open={open} setIsOpen={setIsOpen} />
         </>
     )
 }

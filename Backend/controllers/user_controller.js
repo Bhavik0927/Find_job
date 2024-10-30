@@ -90,7 +90,8 @@ export const login = async (req, res) => {
             fullName: user.fullName,
             email: user.email,
             phoneNumber: user.phoneNumber,
-            role: user.role
+            role: user.role,
+            profile:user.profile.profilePhoto
         }
 
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: "strict" }).json({

@@ -60,7 +60,7 @@ const Navbar = () => {
                             <div className="relative inline-block cursor-pointer">
                                 {/* Avatar */}
                                 <img
-                                    src={user?.profile?.profilePhoto}
+                                    src={user?.profile}
                                     alt="Avatar"
                                     className="w-12 h-12 rounded-full cursor-pointer"
                                     onClick={togglePopover}
@@ -70,7 +70,7 @@ const Navbar = () => {
                                     <div className="absolute left-[-255%] -translate-x-1/2 mt-2 w-80 p-4 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-700 ">
                                         <div className="flex gap-4 space-y-2">
                                             <img
-                                                src={user?.profile?.profilePhoto}
+                                                src={user?.profile}
                                                 alt="Avatar"
                                                 className="w-10 h-10 rounded-full cursor-pointer"
                                             />
