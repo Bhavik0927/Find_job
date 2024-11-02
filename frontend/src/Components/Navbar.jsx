@@ -41,9 +41,18 @@ const Navbar = () => {
                 {/* Navbar Content  */}
                 <div className="flex items-center gap-12">
                     <ul className="flex font-medium items-center gap-5 cursor-pointer">
-                        <Link to="/"><li>Home</li></Link>
-                        <Link to="/jobs"> <li>Jobs</li> </Link>
-                        <Link to="/browse"><li>Brows</li></Link>
+                        {
+                            user && user.role === 'recruiter' ? (
+                                <>
+                                    <Link to="/admin/companies"><li>Companies</li></Link>
+                                    <Link to="/admin/jobs"> <li>Jobs</li> </Link>
+                                </>
+                            ) : <>
+                                <Link to="/"><li>Home</li></Link>
+                                <Link to="/jobs"> <li>Jobs</li> </Link>
+                                <Link to="/browse"><li>Brows</li></Link>
+                            </>
+                        }
                     </ul>
                     {
                         !user ? (
@@ -83,7 +92,12 @@ const Navbar = () => {
                                         </div>
 
                                         <div className="flex items-center justify-evenly  gap-3 mt-2">
-                                            <button className="text-black hover:underline"><Link to="/view-profile"> View Profile </Link> </button>
+                                            {
+                                                user && user.role === 'Student' && (
+                                                    <button className="text-black hover:underline"><Link to="/view-profile"> View Profile </Link> </button>
+
+                                                )
+                                            }
                                             <button className="text-black hover:underline" onClick={logoutHandler}> Logout</button>
                                         </div>
                                     </div>
