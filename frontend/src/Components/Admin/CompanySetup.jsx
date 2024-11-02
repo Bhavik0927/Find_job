@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../Navbar"
 import { IoIosArrowBack } from "react-icons/io";
 import axios from "axios";
+import { COMPANIES_API_END_POINT } from "@/utils/constant";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import Loader from "../Loader";
 
 const CompanySetup = () => {
     const [input, setInput] = useState({
@@ -11,8 +16,10 @@ const CompanySetup = () => {
         location: "",
         file: null
     })
-
+    const { singleCompany } = useSelector(store => store.company);
     const [loading, setLoading] = useState(false);
+    const params = useParams();
+    const navigate = useNavigate();
 
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
@@ -24,27 +31,51 @@ const CompanySetup = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("name",input.name)
-        formData.append("description",input.description)
-        formData.append("website",input.website)
-        formData.append("location",input.location)
+        formData.append("name", input.name)
+        formData.append("description", input.description)
+        formData.append("website", input.website)
+        formData.append("location", input.location)
 
-        if(input.file){
-            formData.append("file",input.file);
+        if (input.file) {
+            formData.append("file", input.file);
         }
         try {
-            const res = axios.put
+            setLoading(true);
+            const res = await axios.put(`${COMPANIES_API_END_POINT}/update/${params.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                withCredentials: true
+            });
+            console.log(res);
+            if (res.data.success) {
+                toast.success(res.data.message);
+                navigate('/admin/companies');
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error(error.response.data.message);
+        } finally {
+            setLoading(false);
         }
     }
+
+    useEffect(() => {
+        setInput({
+            name: singleCompany.name || "",
+            description: singleCompany.discription || "",
+            website: singleCompany.company || "",
+            location: singleCompany.location || "",
+            file: singleCompany.file || null
+        })
+    }, [singleCompany])
     return (
         <div>
             <Navbar />
             <div className="max-w-xl mx-auto my-10">
                 <form action="" onSubmit={submitHandler}>
                     <div className="flex items-center gap-5 p-8">
-                        <button className="flex items-center gap-1 text-white font-semibold bg-black py-2 px-2 rounded-lg ">
+                        <button className="flex items-center gap-1 text-white font-semibold bg-black py-2 px-2 rounded-lg " onClick={() => navigate('/admin/companies')}>
                             <IoIosArrowBack />
                             <span>Back</span>
                         </button>
@@ -96,7 +127,10 @@ const CompanySetup = () => {
                             />
                         </div>
                     </div>
-                    <button type="submit" className="w-full py-1 border border-gray-300 rounded-lg">Update</button>
+                    {
+                        loading ? <button className="w-full flex gap-2 items-center justify-center bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold"><Loader />Please wait </button> : <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Update</button>
+                    }
+                    
                 </form>
             </div>
         </div>
