@@ -7,8 +7,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Loader from "../Loader";
+import useGetCompanyById from "@/hooks/useGetCompanyById";
 
 const CompanySetup = () => {
+    const params = useParams();
+    useGetCompanyById(params.id);
+
     const [input, setInput] = useState({
         name: "",
         description: "",
@@ -17,8 +21,8 @@ const CompanySetup = () => {
         file: null
     })
     const { singleCompany } = useSelector(store => store.company);
+    console.log(singleCompany);
     const [loading, setLoading] = useState(false);
-    const params = useParams();
     const navigate = useNavigate();
 
     const changeEventHandler = (e) => {
@@ -63,8 +67,8 @@ const CompanySetup = () => {
     useEffect(() => {
         setInput({
             name: singleCompany.name || "",
-            description: singleCompany.discription || "",
-            website: singleCompany.company || "",
+            description: singleCompany?.description|| "",
+            website: singleCompany.website || "",
             location: singleCompany.location || "",
             file: singleCompany.file || null
         })
@@ -95,7 +99,7 @@ const CompanySetup = () => {
                             <label >Description</label>
                             <input type="text"
                                 name="description"
-                                value={input.description}
+                                value={input?.description}
                                 className="my-2 py-1 px-2 mx-2 border border-gray-300 rounded-lg"
                                 onChange={changeEventHandler}
                             />
@@ -104,7 +108,7 @@ const CompanySetup = () => {
                             <label >Website</label>
                             <input type="text"
                                 name="website"
-                                value={input.website}
+                                value={input.website }
                                 className="my-2 py-1 px-2 mx-2 border border-gray-300 rounded-lg"
                                 onChange={changeEventHandler}
                             />
@@ -130,7 +134,7 @@ const CompanySetup = () => {
                     {
                         loading ? <button className="w-full flex gap-2 items-center justify-center bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold"><Loader />Please wait </button> : <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Update</button>
                     }
-                    
+
                 </form>
             </div>
         </div>
