@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "../Navbar"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { setSearchCompanyByText } from "@/store/companySlice"
+import { setSearchJobByText } from "@/store/jobSlice"
 import AdminJobsTable from "./AdminJobsTable"
 import useGetAllAdminJobs from "@/hooks/useGetAllAdminJobs"
 
@@ -14,7 +14,7 @@ const JobsAD = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setSearchCompanyByText(input));
+    dispatch(setSearchJobByText(input));
   }, [input])
 
   return (
@@ -24,11 +24,11 @@ const JobsAD = () => {
         <div className="flex items-center justify-between">
           <input
             type="text"
-            className="w-fit"
+            className="w-1/3 border border-gray-200 rounded-lg py-1 px-2"
             placeholder="Filter by name "
             onChange={(e) => setInput(e.target.value)}
           />
-          <button className="py-2 px-2 bg-black rounded-lg text-white font-semibold " onClick={() => navigate("/admin/companies/create")}> New Jobs</button>
+          <button className="py-2 px-2 bg-black rounded-lg text-white font-semibold " onClick={() => navigate("/admin/jobs/create")}> New Jobs</button>
         </div>
         
         <AdminJobsTable />

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminJobsTable = () => {
 
-    const {  allAdminJobs, searchJobByText } = useSelector(store => store.job);
+    const { allAdminJobs, searchJobByText } = useSelector(store => store.job);
 
     const [filterJobs, setFilterJobs] = useState(allAdminJobs);
 
@@ -18,7 +18,7 @@ const AdminJobsTable = () => {
             if (!searchJobByText) {
                 return true
             }
-            return job?.name?.toLowerCase().includes(searchJobByText.toLowerCase());
+            return job?.title?.toLowerCase().includes(searchJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(searchJobByText.toLowerCase());
         })
         setFilterJobs(filteredJobs);
     }, [allAdminJobs, searchJobByText]);

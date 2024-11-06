@@ -23,7 +23,7 @@ const Companies = () => {
                 <div className="flex items-center justify-between">
                     <input
                         type="text"
-                        className="w-fit"
+                        className="w-1/3 border border-gray-200 rounded-lg py-1 px-2"
                         placeholder="Filter by name "
                         onChange={(e) => setInput(e.target.value)}
                     />
