@@ -18,7 +18,7 @@ const JobCard = ({job}) => {
             <div>
                 <p className="text-sm text-gray-600">{daysAgo(job?.createdAt) === 0 ? "Today" : `${daysAgo(job?.createdAt)} days ago` }</p>
                 <div className="flex mt-2 items-center  ">
-                    <button className="w-10 h-10 border border-gray-200"><img src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg" alt="company" /></button>
+                    <button className="w-10 h-10 border border-gray-200 rounded-full overflow-hidden"><img src={job?.company?.logo} alt="company" /></button>
 
                     <div className="ml-2">
                         <h1 className="font-medium text-lg">{job?.company?.name}</h1>

@@ -11,6 +11,7 @@ import CompanyCreate from './Components/Admin/CompanyCreate';
 import CompanySetup from './Components/Admin/CompanySetup';
 import JobsAD from './Components/Admin/JobsAD';
 import JobsCreate from './Components/Admin/JobsCreate';
+import AdminJobApplicants from './Components/Admin/AdminJobApplicants';
 
 const appRouter = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/admin/jobs/create",
     element: <JobsCreate />
+  },
+  {
+    path: "admin/jobs/:id/applicants",
+    element: <AdminJobApplicants />
   }
 ])
 

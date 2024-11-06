@@ -5,7 +5,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { CiEdit } from "react-icons/ci";
 import { IoIosMore } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-
+import { IoMdEye } from "react-icons/io";
 
 const AdminJobsTable = () => {
 
@@ -54,6 +54,10 @@ const AdminJobsTable = () => {
                                             <div onClick={() => navigate(`/admin/companies/${job._id}`)} className="flex items-center gap-4 w-fit cursor-pointer">
                                                 <CiEdit className="text-xl" />
                                                 <span>Edit</span>
+                                            </div>
+                                            <div className="flex items-center gap-4 w-fit cursor-pointer" onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)}>
+                                                <IoMdEye className="text-xl" />
+                                                <span>Applicants</span>
                                             </div>
                                         </PopoverContent>
                                     </Popover>
