@@ -23,7 +23,7 @@ const Profile = () => {
                 <div className="flex justify-between mb-4">
 
                     <div className="flex mt-2 items-center  ">
-                        <button className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden"><img src="https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg" alt="company" /></button>
+                         <button className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden"><img src={user?.profile?.profilePhoto} alt="company" /></button> 
 
                         <div className="ml-2">
                             <h1 className="font-medium text-lg">{user?.fullName}</h1>
