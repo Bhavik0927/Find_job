@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux";
 
 const AppliedJobTable = () => {
+  const { allAppliedJobs } = useSelector(store => store.job);
+  console.log(allAppliedJobs);
   return (
     <div>
       <table>
@@ -15,13 +18,15 @@ const AppliedJobTable = () => {
 
         <tbody>
           {
-            [1, 2, 3].map((item, index) => (
-              <tr key={index} className="border-b">
-                <td className="py-2 px-5">17-07-2023</td>
-                <td className="py-2 px-5">Frontend Developer</td>
-                <td className="py-2 px-5">Microsoft</td>
-                <td className="py-2 px-5 text-right"> <span className="inline-block px-2 py-1 text-right text-sm font-semibold text-black  border  border-gray-400  rounded-full cursor-pointer">Pending</span></td>
-              </tr>
+            allAppliedJobs?.length <= 0 ? <spna>You haven't applied any job yet</spna> : allAppliedJobs?.map((appliedJob) => (
+              <tr key={appliedJob._id} className="border-b">
+                <td className="py-2 px-5">{appliedJob?.createdAt?.split("T")[0]}</td>
+                <td className="py-2 px-5">{appliedJob?.job?.title}</td>
+                <td className="py-2 px-5">{appliedJob?.job?.company?.name}</td>
+                <td className="py-2 px-5 text-right">
+                  <span className={`${appliedJob?.status === 'rejected' ? 'bg-red-400' : appliedJob?.status === 'pending' ? 'bg-gray-400 text-white' : 'bg-green-400 text-white'} inline-block px-2 py-1 text-right text-sm font-semibold  border  border-gray-300  rounded-full cursor-pointer`} >{appliedJob?.status.toUpperCase()}</span>
+                </td>
+              </tr >
             ))
 
           }

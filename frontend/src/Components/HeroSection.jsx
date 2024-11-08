@@ -11,7 +11,7 @@ const HeroSection = () => {
                     <input
                         type="text"
                         placeholder="Find your dream jobs"
-                        className="outline-none border-none w-full py-2"
+                        className="outline-none border-none w-full py-2 px-2"
                     />
                     <button className=" text-black cursor-pointer pr-3 text-center h-full "> <CiSearch className="w-5 h-5 " /> </button>
                 </div>
