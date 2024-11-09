@@ -24,7 +24,7 @@ const Profile = () => {
                 <div className="flex justify-between mb-4">
 
                     <div className="flex mt-2 items-center  ">
-                         <button className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden"><img src={user?.profile?.profilePhoto} alt="company" /></button> 
+                         <button className="w-12 h-12 border border-gray-200 rounded-full overflow-hidden"><img src={user?.profile} alt="company" /></button> 
 
                         <div className="ml-2">
                             <h1 className="font-medium text-lg">{user?.fullName}</h1>

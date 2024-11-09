@@ -26,7 +26,7 @@ const AppliedJobTable = () => {
                 <td className="py-2 px-5 text-right">
                   <span className={`${appliedJob?.status === 'rejected' ? 'bg-red-400' : appliedJob?.status === 'pending' ? 'bg-gray-400 text-white' : 'bg-green-400 text-white'} inline-block px-2 py-1 text-right text-sm font-semibold  border  border-gray-300  rounded-full cursor-pointer`} >{appliedJob?.status.toUpperCase()}</span>
                 </td>
-              </tr >
+              </tr>
             ))
 
           }

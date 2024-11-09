@@ -1,6 +1,18 @@
+import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { setSearchQuery } from "@/store/jobSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+    const [query, setQuery ] = useState("");
+    const dispath = useDispatch();
+    const navigate = useNavigate();
+    
+    const searchJobHandler = () =>{
+        dispath(setSearchQuery(query));
+        navigate('/browse')
+    }
     return (
         <div className='text-center'>
             <div className="flex flex-col gap-5 my-10">
@@ -11,9 +23,10 @@ const HeroSection = () => {
                     <input
                         type="text"
                         placeholder="Find your dream jobs"
+                        onChange={(e) => setQuery(e.target.value)}
                         className="outline-none border-none w-full py-2 px-2"
                     />
-                    <button className=" text-black cursor-pointer pr-3 text-center h-full "> <CiSearch className="w-5 h-5 " /> </button>
+                    <button className=" text-black cursor-pointer pr-3 text-center h-full " onClick={searchJobHandler}> <CiSearch className="w-5 h-5 " /> </button>
                 </div>
             </div>
         </div>

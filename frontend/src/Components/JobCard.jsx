@@ -11,7 +11,7 @@ const JobCard = ({job}) => {
         const timeDifference = currentTime - createAt;
         return Math.floor(timeDifference/ (1000*24*60*60))
     }
-    
+    console.log(job);
     return (
         <div className="flex justify-between gap-6 p-4 rounded-md shadow-xl bg-white border border-gray-100">
 
