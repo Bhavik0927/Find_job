@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import axios from 'axios';
@@ -19,7 +19,7 @@ const Signup = () => {
         file: ""
     });
 
-    const {loading} = useSelector(store => store.auth);
+    const {user,loading} = useSelector(store => store.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -64,6 +64,13 @@ const Signup = () => {
             dispatch(setLoading(false))
         }
     }
+
+    useEffect(() =>{
+        if(user){
+            navigate("/")
+        }
+    },[])
+    
     return (
         <div>
             <Navbar />
