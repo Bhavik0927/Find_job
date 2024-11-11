@@ -61,7 +61,7 @@ const UpdateProfileDialog = ({ open, setIsOpen }) => {
             setLoading(false);
         }
         setIsOpen(false);
-        console.log(input);
+        
     }
     return (
         <div >
@@ -166,7 +166,6 @@ const UpdateProfileDialog = ({ open, setIsOpen }) => {
                         <DialogFooter>
                             {
                                 loading ? <button className="w-full flex gap-2 items-center justify-center bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold"><Loader />Please wait </button> : <button type="submit" className="w-full bg-black text-white py-1 rounded-md mt-6 font-semibold hover:font-bold">Update</button>
-
                             }
                         </DialogFooter>
                     </form>

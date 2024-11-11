@@ -8,7 +8,6 @@ import useGetAllJobs from '@/hooks/useGetAllJobs';
 const Browse = () => {
   useGetAllJobs();
   const { allJobs } = useSelector(store => store.job);
-  console.log(allJobs);
 
   const dispatch = useDispatch();
 

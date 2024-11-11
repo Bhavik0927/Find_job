@@ -16,7 +16,6 @@ const Profile = () => {
     useGetAppliedJob();
     const [open, setIsOpen] = useState(false);
     const { user } = useSelector(store => store.auth);
-    console.log(user);
     return (
         <>
             <Navbar />
