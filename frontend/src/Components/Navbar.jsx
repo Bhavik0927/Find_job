@@ -42,7 +42,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-12">
                     <ul className="flex font-medium items-center gap-5 cursor-pointer">
                         {
-                            user && user.role === 'recruiter' ? (
+                            user && user?.role === 'recruiter' ? (
                                 <>
                                     <Link to="/admin/companies"><li>Companies</li></Link>
                                     <Link to="/admin/jobs"> <li>Jobs</li> </Link>
