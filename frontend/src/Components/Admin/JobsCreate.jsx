@@ -3,7 +3,6 @@ import Navbar from "../Navbar"
 import { useSelector } from "react-redux";
 import { Select, SelectValue, SelectTrigger, SelectContent, SelectGroup, SelectItem } from "../ui/select";
 import axios from "axios";
-import { JOB_API_END_POINT } from "@/utils/constant";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
@@ -21,6 +20,7 @@ const JobsCreate = () => {
         position: 0,
         companyId: ""
     })
+    
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const JobsCreate = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+            const res = await axios.post(`https://find-job-2-drpq.onrender.com/api/v1/job/post`, input, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

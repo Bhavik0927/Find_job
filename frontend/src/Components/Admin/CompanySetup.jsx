@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Navbar from "../Navbar"
 import { IoIosArrowBack } from "react-icons/io";
 import axios from "axios";
-import { COMPANIES_API_END_POINT } from "@/utils/constant";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -45,7 +44,7 @@ const CompanySetup = () => {
         }
         try {
             setLoading(true);
-            const res = await axios.put(`${COMPANIES_API_END_POINT}/update/${params.id}`, formData, {
+            const res = await axios.put(`https://find-job-2-drpq.onrender.com/api/v1/company/update/${params.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

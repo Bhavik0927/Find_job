@@ -2,7 +2,6 @@ import { useState,useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "./Navbar";
 import axios from 'axios';
-import { USER_API_END_POINT } from "../utils/constant";
 import { toast } from 'react-toastify';
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +44,7 @@ const Signup = () => {
 
         try {
             dispatch(setLoading(true))
-            const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+            const res = await axios.post(`https://find-job-2-drpq.onrender.com/api/v1/user/register`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 },

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useEffect } from 'react'
-import { COMPANIES_API_END_POINT } from '@/utils/constant'
 import { useDispatch } from 'react-redux'
 import { setCompanies } from '@/store/companySlice'
 
@@ -10,7 +9,7 @@ const useGetAllCompanies = () => {
     useEffect(() => {
         const fetchAllCompanies = async () => {
             try {
-                const res = await axios.get(`${COMPANIES_API_END_POINT}/get`, { withCredentials: true });
+                const res = await axios.get(`https://find-job-2-drpq.onrender.com/api/v1/company/get`, { withCredentials: true });
                 if (res.data.success) {
                     dispatch(setCompanies(res.data.companies));
                 }

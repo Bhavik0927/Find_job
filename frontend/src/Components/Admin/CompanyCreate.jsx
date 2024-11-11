@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import axios from "axios";
-import { COMPANIES_API_END_POINT } from "@/utils/constant";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -14,7 +13,7 @@ const CompanyCreate = () => {
 
     const registerNewCompany = async () => {
         try {
-            const res = await axios.post(`${COMPANIES_API_END_POINT}/register`, { companyName }, {
+            const res = await axios.post(`https://find-job-2-drpq.onrender.com/api/v1/company/register`, { companyName }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

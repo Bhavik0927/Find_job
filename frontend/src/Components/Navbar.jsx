@@ -18,7 +18,7 @@ const Navbar = () => {
 
     const logoutHandler = async () => {
         try {
-            const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+            const res = await axios.get(`https://find-job-2-drpq.onrender.com/api/v1/user/logout`, { withCredentials: true });
             if (res.data.success) {
                 dispatch(setAuthUser(null));
                 navigate('/');

@@ -43,7 +43,7 @@ const UpdateProfileDialog = ({ open, setIsOpen }) => {
         }
         try {
             setLoading(true);
-            const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData,{
+            const res = await axios.post(`https://find-job-2-drpq.onrender.com/api/v1/user/profile/update`, formData,{
                 headers:{
                     'Content-Type':'multipart/form-data'
                 },
